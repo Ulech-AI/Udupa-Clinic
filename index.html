@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Clinic Name | General Physician</title>
+
+<style>
+
+/* ---------------- RESET ---------------- */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+color:#333;
+background:#fff;
+overflow-x:hidden;
+}
+
+/* ---------------- HEADER ---------------- */
+
+header{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:14px 5%;
+background:rgba(255,255,255,0.95);
+backdrop-filter:blur(8px);
+z-index:999;
+flex-wrap:wrap;
+}
+
+.logo{
+font-size:18px;
+font-weight:700;
+white-space:nowrap;
+}
+
+nav{
+display:flex;
+flex-wrap:wrap;
+justify-content:flex-end;
+gap:12px;
+}
+
+nav a{
+text-decoration:none;
+color:#333;
+font-size:14px;
+padding:6px 4px;
+}
+
+nav a:hover{
+color:#316CA3;
+}
+
+/* ---------------- BUTTON MICRO ANIMATION ---------------- */
+
+button,.cta{
+cursor:pointer;
+transition:all .25s ease;
+}
+
+button:hover,.cta:hover{
+transform:scale(1.07);
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+.cta{
+padding:14px 28px;
+border:none;
+background:#316CA3;
+color:white;
+font-size:16px;
+border-radius:8px;
+}
+
+/* ---------------- HERO ---------------- */
+
+.hero{
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+position:relative;
+padding:20px;
+}
+
+.hero::before{
+content:"";
+position:absolute;
+inset:0;
+background:url("https://images.unsplash.com/photo-1580281657521-8a7b1a91b8b3?q=80&w=2070") center/cover no-repeat;
+z-index:-2;
+}
+
+.hero::after{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.6));
+z-index:-1;
+}
+
+.hero-content{
+max-width:650px;
+color:white;
+}
+
+.hero h1{
+font-size:42px;
+margin-bottom:15px;
+}
+
+.hero p{
+margin-bottom:25px;
+font-size:18px;
+}
+
+/* ---------------- POPUP ---------------- */
+
+.popup{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.5);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:1000;
+}
+
+.popup-box{
+background:white;
+padding:30px;
+border-radius:10px;
+width:90%;
+max-width:400px;
+}
+
+.popup-box input,
+.popup-box textarea{
+width:100%;
+padding:12px;
+margin-top:10px;
+border-radius:6px;
+border:1px solid #ccc;
+}
+
+.popup-box button{
+margin-top:15px;
+width:100%;
+padding:12px;
+background:#316CA3;
+border:none;
+color:white;
+border-radius:6px;
+}
+
+/* ---------------- SECTIONS ---------------- */
+
+section{
+padding:120px 6%;
+max-width:1100px;
+margin:auto;
+}
+
+/* ---------------- SERVICES ---------------- */
+
+.services-wrapper{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:25px;
+}
+
+.service-card{
+width:320px;
+height:220px;
+border-radius:12px;
+overflow:hidden;
+position:relative;
+box-shadow:0 15px 35px rgba(0,0,0,0.2);
+transform-style:preserve-3d;
+transition:transform .6s;
+}
+
+.service-card.flip{
+transform:rotateY(180deg);
+}
+
+.service-card img{
+width:100%;
+height:100%;
+object-fit:cover;
+filter:brightness(.55);
+}
+
+.service-content{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+color:white;
+text-align:center;
+padding:20px;
+width:90%;
+}
+
+.service-content h3{
+margin-bottom:8px;
+}
+
+.arrow{
+font-size:24px;
+background:#316CA3;
+color:white;
+border:none;
+width:40px;
+height:40px;
+border-radius:50%;
+}
+
+/* ---------------- REVIEWS ---------------- */
+
+.review-container{
+max-width:650px;
+margin:auto;
+text-align:center;
+position:relative;
+min-height:120px;
+}
+
+.review-box{
+background:white;
+padding:30px;
+border-radius:12px;
+box-shadow:0 12px 30px rgba(0,0,0,0.15);
+}
+
+.review{
+font-size:17px;
+opacity:0;
+position:absolute;
+left:0;
+right:0;
+transition:opacity .6s, transform .6s;
+transform:scale(.95);
+}
+
+.review.active{
+opacity:1;
+position:relative;
+transform:scale(1);
+}
+
+/* ---------------- CTA BOX ---------------- */
+
+.cta-box{
+
+background:
+linear-gradient(rgba(49,108,163,0.95),rgba(49,108,163,0.95)),
+url("https://www.transparenttextures.com/patterns/cubes.png");
+
+color:white;
+padding:60px;
+border-radius:14px;
+text-align:center;
+
+box-shadow:
+0 25px 60px rgba(0,0,0,0.25),
+0 10px 25px rgba(0,0,0,0.15);
+
+}
+
+/* ---------------- FOOTER ---------------- */
+
+footer{
+padding:60px 6%;
+background:#111;
+color:#eee;
+text-align:center;
+}
+
+footer a{
+color:#bbb;
+margin:0 10px;
+text-decoration:none;
+}
+
+/* ---------------- SCROLL ANIMATION ---------------- */
+
+.fade{
+opacity:0;
+transform:translateY(40px);
+transition:all .7s ease;
+}
+
+.fade.show{
+opacity:1;
+transform:none;
+}
+
+/* ---------------- MOBILE ---------------- */
+
+@media(max-width:600px){
+
+header{
+flex-direction:column;
+align-items:flex-start;
+gap:6px;
+}
+
+nav{
+width:100%;
+justify-content:space-between;
+}
+
+.hero h1{
+font-size:30px;
+}
+
+.services-wrapper{
+flex-direction:column;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">Clinic Name</div>
+
+<nav>
+<a href="#">Home</a>
+<a href="#services">Services</a>
+<a href="#reviews">Reviews</a>
+<a href="#">Booking</a>
+</nav>
+
+</header>
+
+<!-- HERO -->
+
+<section class="hero fade">
+
+<div class="hero-content">
+
+<h1>Your Trusted General Physician</h1>
+
+<p>Personalized care for your health and wellbeing.</p>
+
+<button class="cta" onclick="openPopup()">Book Appointment</button>
+
+</div>
+
+</section>
+
+<!-- POPUP -->
+
+<div class="popup" id="popup">
+
+<div class="popup-box">
+
+<h3>Book Appointment</h3>
+
+<input placeholder="Your Name">
+<textarea placeholder="Your Problem"></textarea>
+<input placeholder="Phone Number">
+
+<button>Submit</button>
+
+</div>
+
+</div>
+
+<!-- SERVICES -->
+
+<section id="services" class="fade">
+
+<div class="services-wrapper">
+
+<button class="arrow" onclick="prevService()">‹</button>
+
+<div class="service-card" id="serviceCard">
+
+<img id="serviceImage">
+
+<div class="service-content">
+<h3 id="serviceTitle"></h3>
+<p id="serviceText"></p>
+</div>
+
+</div>
+
+<button class="arrow" onclick="nextService()">›</button>
+
+</div>
+
+</section>
+
+<!-- REVIEWS -->
+
+<section id="reviews" class="fade">
+
+<div class="review-container">
+
+<div class="review-box">
+
+<div class="review active">"Very professional doctor!"</div>
+<div class="review">"Excellent treatment and friendly staff."</div>
+<div class="review">"Highly recommend for general consultation."</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- CTA -->
+
+<section class="fade">
+
+<div class="cta-box">
+
+<h2>Need medical advice?</h2>
+
+<p>Schedule your consultation today.</p>
+
+<br>
+
+<button class="cta" onclick="openPopup()">Book Appointment</button>
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+<h3>Dr. Placeholder Name</h3>
+
+<p>General Physician</p>
+
+<p>Phone: +91 XXXXX XXXXX</p>
+
+<br>
+
+<a href="#">LinkedIn</a>
+<a href="#">Instagram</a>
+<a href="#">Google Reviews</a>
+
+<p style="margin-top:20px;font-size:13px;">© 2026 Clinic Name</p>
+
+</footer>
+
+<script>
+
+/* POPUP */
+
+function openPopup(){
+document.getElementById("popup").style.display="flex";
+}
+
+window.onclick=function(e){
+if(e.target.id==="popup"){
+document.getElementById("popup").style.display="none";
+}
+}
+
+/* SERVICES */
+
+const services=[
+
+{
+title:"General Checkup",
+text:"Routine consultations and diagnosis.",
+img:"https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=2000"
+},
+
+{
+title:"Fever & Infection Care",
+text:"Treatment for common infections and flu.",
+img:"https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2000"
+},
+
+{
+title:"Preventive Health Screening",
+text:"Early detection and health monitoring.",
+img:"https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=2000"
+}
+
+];
+
+let serviceIndex=0;
+
+const card=document.getElementById("serviceCard");
+
+function updateService(){
+
+document.getElementById("serviceImage").src=services[serviceIndex].img;
+document.getElementById("serviceTitle").textContent=services[serviceIndex].title;
+document.getElementById("serviceText").textContent=services[serviceIndex].text;
+
+}
+
+function flipAnimation(callback){
+
+card.classList.add("flip");
+
+setTimeout(()=>{
+
+callback();
+card.classList.remove("flip");
+
+},300);
+
+}
+
+function nextService(){
+
+flipAnimation(()=>{
+serviceIndex=(serviceIndex+1)%services.length;
+updateService();
+});
+
+}
+
+function prevService(){
+
+flipAnimation(()=>{
+serviceIndex=(serviceIndex-1+services.length)%services.length;
+updateService();
+});
+
+}
+
+updateService();
+
+/* REVIEWS */
+
+const reviews=document.querySelectorAll(".review");
+let index=0;
+
+setInterval(()=>{
+
+reviews[index].classList.remove("active");
+
+index=(index+1)%reviews.length;
+
+reviews[index].classList.add("active");
+
+},4000);
+
+/* SCROLL ANIMATION */
+
+const faders=document.querySelectorAll(".fade");
+
+const observer=new IntersectionObserver(entries=>{
+
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add("show");
+}
+});
+
+});
+
+faders.forEach(el=>observer.observe(el));
+
+</script>
+
+</body>
+</html>
